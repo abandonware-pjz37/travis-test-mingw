@@ -1,0 +1,31 @@
+# OSX/Linux (https://github.com/travis-ci-tester/toolchain-table)
+
+language:
+  - cpp
+
+# Container-based infrastructure (Linux)
+# * https://docs.travis-ci.com/user/migrating-from-legacy/#How-can-I-use-container-based-infrastructure%3F
+sudo:
+  - false
+
+dist:
+  - trusty
+
+# Install packages differs for container-based infrastructure
+# * https://docs.travis-ci.com/user/migrating-from-legacy/#How-do-I-install-APT-sources-and-packages%3F
+addons:
+  apt:
+    packages:
+      - mingw-w64
+
+install:
+  # Info about OS
+  - uname -a
+
+script:
+  - which x86_64-w64-mingw32-g++
+
+# https://docs.travis-ci.com/user/customizing-the-build/#Whitelisting-or-blacklisting-branches
+branches:
+  except:
+    - /^pr\..*/
